@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raka — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="portfolio-components.jsx"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { background: #FAF6E9; font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #000; -webkit-font-smoothing: antialiased; height: 100%; }
+
+    #root { height: 100%; }
+
+    /* ── page transition ── */
+    @keyframes pgIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .page-in { animation: pgIn 0.28s cubic-bezier(0.4,0,0.2,1) both; }
+
+    /* ── stagger child entrance ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .stagger > * {
+      animation: fadeUp 0.35s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    .stagger > *:nth-child(1) { animation-delay: 0.04s; }
+    .stagger > *:nth-child(2) { animation-delay: 0.09s; }
+    .stagger > *:nth-child(3) { animation-delay: 0.14s; }
+    .stagger > *:nth-child(4) { animation-delay: 0.19s; }
+
+    /* ── shimmer placeholder ── */
+    @keyframes shimmer {
+      0%   { background-position: -600px 0; }
+      100% { background-position:  600px 0; }
+    }
+    .img-shimmer {
+      background: linear-gradient(90deg, #D9D9D9 25%, #e8e4da 50%, #D9D9D9 75%);
+      background-size: 800px 100%;
+      animation: shimmer 1.6s ease infinite;
+    }
+
+    /* ── card hover lift ── */
+    .card-lift {
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      cursor: pointer;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+    }
+
+    /* ── list row hover ── */
+    .row-hover {
+      transition: background 0.15s ease;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .row-hover:hover { background: rgba(0,0,0,0.03); }
+
+    /* ── connect icon hover ── */
+    .connect-icon {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .connect-icon:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    /* ── back button ── */
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: none; border: none; cursor: pointer; font-family: inherit;
+      font-size: 14px; color: #71717A; padding: 0; margin-bottom: 28px;
+      transition: color 0.15s; text-decoration: none;
+    }
+    .back-btn:hover { color: #000; }
+    .back-btn svg { transition: transform 0.2s ease; }
+    .back-btn:hover svg { transform: translateX(-3px); }
+
+    /* ── button transitions ── */
+    button { transition: opacity 0.15s; }
+    button:hover { opacity: 0.82; }
+
+    /* ── TOC link ── */
+    .toc-link {
+      display: block; font-size: 14px; font-weight: 500;
+      padding: 6px 0; cursor: pointer;
+      transition: color 0.2s ease;
+      border: none; background: none; font-family: inherit;
+      text-align: left; line-height: 1.4;
+    }
+
+    /* ── scrollbar ── */
+    #scroll-root::-webkit-scrollbar { width: 3px; }
+    #scroll-root::-webkit-scrollbar-track { background: transparent; }
+    #scroll-root::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="portfolio-pages.jsx"></script>
+</body>
+</html>
