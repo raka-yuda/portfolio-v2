@@ -208,7 +208,7 @@
 /* Footer */
 [data-style="skeumorphic"] .footer-sig { color: #8B2020 !important; }
 
-[data-style="skeumorphic"] .bottom-nav > .bottom-nav-divider {
+[data-style="skeumorphic"] .bottom-nav-divider {
   background-color: #3A2810 !important;
 }
 

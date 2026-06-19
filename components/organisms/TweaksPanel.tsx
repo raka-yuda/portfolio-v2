@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { useTheme } from '@/lib/theme'
+import { useTweaks } from '@/lib/tweaks'
 
 const options = [
   {
@@ -53,22 +53,22 @@ const options = [
 
 export function TweaksPanel() {
   const { styleMode: style, setStyleMode: setStyle } = useTheme()
-  const [open, setOpen] = useState(false)
+  const { open, toggle, tabVisible } = useTweaks()
 
   return (
     <>
       {/* Toggle tab */}
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={toggle}
         aria-label="Open tweaks panel"
         style={{
-          position: 'fixed', right: open ? 212 : 0, top: '50%',
+          position: 'fixed', right: tabVisible ? (open ? 212 : 0) : -40, top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 200,
           background: 'var(--surface-1)',
           border: '1px solid var(--border-soft)',
           borderRight: open ? '1px solid var(--border-soft)' : 'none',
-          borderRadius: open ? '8px 0 0 8px' : '8px 0 0 8px',
+          borderRadius: '8px 0 0 8px',
           padding: '12px 6px',
           cursor: 'pointer',
           color: 'var(--text-soft)',
@@ -80,6 +80,8 @@ export function TweaksPanel() {
           textOrientation: 'mixed',
           transition: 'right 0.3s cubic-bezier(0.4,0,0.2,1)',
           boxShadow: '-2px 0 12px rgba(0,0,0,0.06)',
+          opacity: tabVisible ? 1 : 0,
+          pointerEvents: tabVisible ? 'auto' : 'none',
         }}
       >
         TWEAKS

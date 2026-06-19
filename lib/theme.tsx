@@ -6,6 +6,7 @@ import { useTheme as useNextTheme } from 'next-themes'
 type StyleMode = 'modern' | 'skeumorphic'
 type ColorMode = 'light' | 'dark'
 type CombinedTheme = 'light-modern' | 'dark-modern' | 'light-skeumorphic' | 'dark-skeumorphic'
+const defaultStyleMode: StyleMode = 'skeumorphic'
 
 interface ThemeContextValue {
   colorMode: ColorMode
@@ -18,8 +19,8 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue>({
   colorMode: 'light',
-  styleMode: 'modern',
-  combined: 'light-modern',
+  styleMode: defaultStyleMode,
+  combined: 'light-skeumorphic',
   setColorMode: () => {},
   setStyleMode: () => {},
   toggleColorMode: () => {},
@@ -27,7 +28,7 @@ const ThemeContext = createContext<ThemeContextValue>({
 
 export function ThemeContextProvider({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useNextTheme()
-  const [styleMode, setStyleModeState] = useState<StyleMode>('modern')
+  const [styleMode, setStyleModeState] = useState<StyleMode>(defaultStyleMode)
 
   // Restore persisted style on mount — dev only
   useEffect(() => {

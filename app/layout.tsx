@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Plus_Jakarta_Sans, Caveat } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import { ThemeContextProvider } from '@/lib/theme'
+import { TweaksProvider } from '@/lib/tweaks'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { BottomNav } from '@/components/organisms/BottomNav'
 import { TweaksPanel } from '@/components/organisms/TweaksPanel'
@@ -49,11 +50,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <ThemeContextProvider>
-            <TooltipProvider>
+            <TweaksProvider>
+              <TooltipProvider>
               {children}
               <BottomNav />
-              {process.env.NODE_ENV === 'development' && <TweaksPanel />}
-            </TooltipProvider>
+              <TweaksPanel />
+              </TooltipProvider>
+            </TweaksProvider>
           </ThemeContextProvider>
         </ThemeProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
