@@ -1,0 +1,463 @@
+
+
+/* ═══════════════════════════════════════════════
+   SKEUOMORPHIC THEME
+   Reference: iOS calculator — rich materials,
+   realistic depth, own color per surface,
+   light source from top-left.
+   ═══════════════════════════════════════════════ */
+
+[data-style="skeumorphic"] {
+  --bg: #D4C9A8;
+  --accent: #8B2020;
+  --text-base: #1A120A;
+  --text-body: #3A2810;
+  --text-soft: #6B4E2E;
+  --text-faint: #A08060;
+  --border-soft: #B09070;
+  --surface-1: #E8D8B0;
+  --surface-2: #D8C898;
+  --tag-bg: #C8B888;
+  --toc-inactive: #A09070;
+  --placeholder-grad-1: #B89A58;
+  --placeholder-grad-2: #9A7E3A;
+  --code-bg: #C8B888;
+}
+
+[data-style="skeumorphic"] body { background: #D4C9A8; }
+
+/* Layout — same as body, seamless */
+[data-style="skeumorphic"] .layout-container {
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Cards — no fill, blends with page; border + shadow give edges */
+[data-style="skeumorphic"] .card-lift {
+  background: transparent;
+  border-radius: 12px;
+  border: 1px solid #A89060;
+  box-shadow:
+    0 6px 16px rgba(60,30,0,0.20),
+    0 2px 4px rgba(60,30,0,0.12);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+[data-style="skeumorphic"] .card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 28px rgba(60,30,0,0.28),
+    0 4px 8px rgba(60,30,0,0.16);
+}
+/* [data-style="skeumorphic"] .card-lift:hover .card-img > * {
+  transform: scale(1.04);
+} */
+
+/* Image area — recessed slot with inset shadow (placeholder + real images) */
+[data-style="skeumorphic"] .img-placeholder {
+  /* border-radius: 8px !important; */
+  box-shadow:
+    inset 0 3px 8px rgba(0,0,0,0.35),
+    inset 0 1px 3px rgba(0,0,0,0.22),
+    0 1px 0 rgba(255,255,255,0.5) !important;
+}
+
+/* Tags — embossed brass stamp */
+[data-style="skeumorphic"] .sku-tag {
+  background: linear-gradient(180deg, #D4B870 0%, #B89840 100%) !important;
+  border: 1px solid #907830 !important;
+  border-radius: 6px !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.45) inset,
+    0 2px 4px rgba(60,30,0,0.25) !important;
+  color: #1A120A !important;
+  font-weight: 600 !important;
+}
+
+/* Filter tag buttons — beveled key style */
+[data-style="skeumorphic"] .neu-filter-btn {
+  background: linear-gradient(180deg, #E0CC90 0%, #C8B060 100%) !important;
+  border: 1px solid #A89050 !important;
+  border-radius: 8px !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.5) inset,
+    0 2px 5px rgba(60,30,0,0.20) !important;
+  color: #1A120A !important;
+}
+[data-style="skeumorphic"] .neu-filter-btn.active {
+  background: linear-gradient(180deg, #8B2020 0%, #6A1818 100%) !important;
+  border-color: #5A1010 !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.15) inset,
+    inset 0 2px 4px rgba(0,0,0,0.3) !important;
+  color: #F5E8D0 !important;
+}
+
+/* Profile avatar — engraved metal disc */
+[data-style="skeumorphic"] .neu-avatar {
+  background: radial-gradient(circle at 35% 35%, #E8D898, #B89848) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.5) inset,
+    0 4px 12px rgba(60,30,0,0.35),
+    0 1px 3px rgba(60,30,0,0.2) !important;
+}
+
+/* CTA band — recessed slot */
+[data-style="skeumorphic"] .neu-cta {
+  background: linear-gradient(180deg, #C8B878 0%, #D4C888 100%) !important;
+  border: 1px solid #A89060 !important;
+  border-radius: 10px !important;
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.15),
+    inset 0 1px 3px rgba(0,0,0,0.10),
+    0 1px 0 rgba(255,255,255,0.5) !important;
+}
+[data-style="skeumorphic"] .neu-cta a {
+  background: linear-gradient(180deg, #A02828 0%, #7A1818 100%) !important;
+  color: #F5E8D0 !important;
+  border: 1px solid #601010 !important;
+  border-radius: 6px !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.2) inset,
+    0 3px 6px rgba(60,0,0,0.4) !important;
+}
+
+/* Connect icons — polished metal tiles */
+[data-style="skeumorphic"] .connect-icon.connect-tile {
+  background: radial-gradient(circle at 35% 30%, #E8D898, #B89848) !important;
+  border: 1px solid #907830 !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.5) inset,
+    0 5px 14px rgba(60,30,0,0.30),
+    0 2px 4px rgba(60,30,0,0.15) !important;
+  color: #3A1A08 !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+[data-style="skeumorphic"] .connect-icon.connect-tile:hover {
+  transform: scale(1.06) !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.5) inset,
+    0 8px 20px rgba(60,30,0,0.40) !important;
+}
+
+/* Bottom nav — dark lacquered wood */
+[data-style="skeumorphic"] .bottom-nav {
+  background: linear-gradient(180deg, #2E2018 0%, #1E1410 100%) !important;
+  border: 1px solid #0E0A08 !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.10) inset,
+    0 10px 30px rgba(0,0,0,0.55),
+    0 3px 8px rgba(0,0,0,0.35) !important;
+}
+[data-style="skeumorphic"] .bottom-nav a,
+[data-style="skeumorphic"] .bottom-nav button {
+  color: #C8A868 !important;
+}
+[data-style="skeumorphic"] .bottom-nav a:hover,
+[data-style="skeumorphic"] .bottom-nav button:hover {
+  color: #F0D090 !important;
+}
+
+/* Back button — beveled pill */
+[data-style="skeumorphic"] .back-btn {
+  background: linear-gradient(180deg, #E0CC90 0%, #C8B060 100%);
+  border: 1px solid #A89050;
+  border-radius: 999px;
+  color: #1A120A;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.5) inset,
+    0 2px 5px rgba(60,30,0,0.20);
+}
+[data-style="skeumorphic"] .back-btn:hover {
+  background: linear-gradient(180deg, #C8B060 0%, #B09848 100%);
+  color: #0A0806;
+  border-color: #806828;
+}
+
+/* Row separators */
+[data-style="skeumorphic"] .row-item:not(:last-child) {
+  border-bottom: 1px solid #B09070;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* Filter tab indicator — lacquer stripe */
+[data-style="skeumorphic"] .tab-indicator {
+  background: #8B2020 !important;
+  box-shadow: 0 0 6px rgba(139,32,32,0.5), 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+
+/* Filter tab text */
+[data-style="skeumorphic"] .filter-tab-btn {
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+}
+
+/* Section divider */
+[data-style="skeumorphic"] .divider-line {
+  background: #A89060;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+/* H1 — deep engraved text */
+[data-style="skeumorphic"] h1 {
+  text-shadow:
+    0 2px 3px rgba(60,30,0,0.25),
+    0 1px 0 rgba(255,255,255,0.35);
+}
+
+/* Footer */
+[data-style="skeumorphic"] .footer-sig { color: #8B2020 !important; }
+
+[data-style="skeumorphic"] .bottom-nav > .bottom-nav-divider {
+  background-color: #3A2810 !important;
+}
+
+/* Tooltip — brass plaque with engraved text */
+[data-style="skeumorphic"] [data-slot="tooltip-content"] {
+  background: linear-gradient(180deg, #E0CC90 0%, #C8B060 100%) !important;
+  border: 1px solid #A89050 !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.5) inset,
+    0 2px 5px rgba(60,30,0,0.20) !important;
+  color: #1A120A !important;
+  font-weight: 600 !important;
+}
+[data-style="skeumorphic"] .tooltip-arrow {
+  background: #C8B060 !important;
+}
+[data-style="skeumorphic"] .tooltip-arrow svg,
+[data-style="skeumorphic"] .tooltip-arrow path,
+[data-style="skeumorphic"] .tooltip-arrow polygon {
+  fill: #C8B060 !important;
+}
+
+/* ═══════════════════════════════════════════════
+   SKEUOMORPHIC × DARK MODE
+   Dark leather, aged brass, oxidised metal.
+   Light source still top-left.
+   ═══════════════════════════════════════════════ */
+
+.dark[data-style="skeumorphic"],
+.dark [data-style="skeumorphic"] {
+  --bg: #1A1208;
+  --accent: #C87840;
+  --text-base: #F0DEB8;
+  --text-body: #D0B888;
+  --text-soft: #A08858;
+  --text-faint: #705830;
+  --border-soft: #3A2810;
+  --surface-1: #241808;
+  --surface-2: #2E2010;
+  --tag-bg: #302018;
+  --toc-inactive: #705830;
+  --placeholder-grad-1: #3A2810;
+  --placeholder-grad-2: #281808;
+  --code-bg: #302018;
+}
+
+.dark[data-style="skeumorphic"] body,
+.dark [data-style="skeumorphic"] body {
+  background: #1A1208;
+}
+
+/* Layout — same as body, seamless */
+.dark[data-style="skeumorphic"] .layout-container,
+.dark [data-style="skeumorphic"] .layout-container {
+  background: transparent;
+}
+
+/* Cards — transparent, blends with dark page */
+.dark[data-style="skeumorphic"] .card-lift,
+.dark [data-style="skeumorphic"] .card-lift {
+  background: transparent;
+  border: 1px solid #4A3018;
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.55),
+    0 2px 6px rgba(0,0,0,0.35);
+}
+.dark[data-style="skeumorphic"] .card-lift:hover,
+.dark [data-style="skeumorphic"] .card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 32px rgba(0,0,0,0.65),
+    0 4px 10px rgba(0,0,0,0.45);
+}
+
+/* Image placeholder — recessed dark slot */
+.dark[data-style="skeumorphic"] .img-placeholder,
+.dark [data-style="skeumorphic"] .img-placeholder {
+  /* border-radius: 8px !important; */
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.65),
+    0 1px 0 rgba(255,180,80,0.06) !important;
+}
+
+/* Tags — oxidised brass */
+.dark[data-style="skeumorphic"] .sku-tag,
+.dark [data-style="skeumorphic"] .sku-tag {
+  background: linear-gradient(180deg, #5A3C18 0%, #3E2810 100%) !important;
+  border: 1px solid #6A4820 !important;
+  box-shadow:
+    0 1px 0 rgba(255,200,100,0.15) inset,
+    0 2px 5px rgba(0,0,0,0.5) !important;
+  color: #E0C080 !important;
+}
+
+/* Filter tag buttons — dark beaten copper */
+.dark[data-style="skeumorphic"] .neu-filter-btn,
+.dark [data-style="skeumorphic"] .neu-filter-btn {
+  background: linear-gradient(180deg, #4A3010 0%, #3A2008 100%) !important;
+  border: 1px solid #5A3818 !important;
+  box-shadow:
+    0 1px 0 rgba(255,200,100,0.12) inset,
+    0 2px 6px rgba(0,0,0,0.5) !important;
+  color: #C09060 !important;
+}
+.dark[data-style="skeumorphic"] .neu-filter-btn.active,
+.dark [data-style="skeumorphic"] .neu-filter-btn.active {
+  background: linear-gradient(180deg, #C87840 0%, #904E20 100%) !important;
+  border-color: #7A3A10 !important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.1) inset,
+    inset 0 2px 5px rgba(0,0,0,0.4) !important;
+  color: #F8E8C0 !important;
+}
+
+/* Profile avatar — aged bronze medallion */
+.dark[data-style="skeumorphic"] .neu-avatar,
+.dark [data-style="skeumorphic"] .neu-avatar {
+  background: radial-gradient(circle at 35% 35%, #6A4A18, #3A2808) !important;
+  box-shadow:
+    0 1px 0 rgba(255,180,80,0.2) inset,
+    0 5px 16px rgba(0,0,0,0.6),
+    0 1px 4px rgba(0,0,0,0.4) !important;
+}
+
+/* CTA band — dark recessed trough */
+.dark[data-style="skeumorphic"] .neu-cta,
+.dark [data-style="skeumorphic"] .neu-cta {
+  background: linear-gradient(180deg, #1A1208, #241808) !important;
+  border: 1px solid #3A2810 !important;
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,0.6),
+    0 1px 0 rgba(255,180,80,0.06) !important;
+}
+.dark[data-style="skeumorphic"] .neu-cta a,
+.dark [data-style="skeumorphic"] .neu-cta a {
+  background: linear-gradient(180deg, #D08040 0%, #904E20 100%) !important;
+  color: #F8E8C0 !important;
+  border: 1px solid #6A3010 !important;
+  box-shadow:
+    0 1px 0 rgba(255,200,100,0.2) inset,
+    0 4px 10px rgba(0,0,0,0.6) !important;
+}
+
+/* Connect icons — dark patinated metal */
+.dark[data-style="skeumorphic"] .connect-icon.connect-tile,
+.dark [data-style="skeumorphic"] .connect-icon.connect-tile {
+  background: radial-gradient(circle at 35% 30%, #4A3010, #281808) !important;
+  border: 1px solid #5A3818 !important;
+  box-shadow:
+    0 1px 0 rgba(255,180,80,0.12) inset,
+    0 6px 18px rgba(0,0,0,0.6) !important;
+  color: #C08040 !important;
+}
+.dark[data-style="skeumorphic"] .connect-icon.connect-tile:hover,
+.dark [data-style="skeumorphic"] .connect-icon.connect-tile:hover {
+  box-shadow:
+    0 1px 0 rgba(255,180,80,0.12) inset,
+    0 10px 24px rgba(0,0,0,0.75) !important;
+}
+
+/* Bottom nav — black lacquer with gold trim */
+.dark[data-style="skeumorphic"] .bottom-nav,
+.dark [data-style="skeumorphic"] .bottom-nav {
+  background: linear-gradient(180deg, #1A1208 0%, #0E0C06 100%) !important;
+  border: 1px solid #4A3010 !important;
+  box-shadow:
+    0 1px 0 rgba(255,180,80,0.12) inset,
+    0 12px 36px rgba(0,0,0,0.8) !important;
+}
+.dark[data-style="skeumorphic"] .bottom-nav a,
+.dark [data-style="skeumorphic"] .bottom-nav a,
+.dark[data-style="skeumorphic"] .bottom-nav button,
+.dark [data-style="skeumorphic"] .bottom-nav button {
+  color: #A07840 !important;
+}
+.dark[data-style="skeumorphic"] .bottom-nav a:hover,
+.dark [data-style="skeumorphic"] .bottom-nav a:hover,
+.dark[data-style="skeumorphic"] .bottom-nav button:hover,
+.dark [data-style="skeumorphic"] .bottom-nav button:hover {
+  color: #E0B060 !important;
+}
+
+/* Back button */
+.dark[data-style="skeumorphic"] .back-btn,
+.dark [data-style="skeumorphic"] .back-btn {
+  background: linear-gradient(180deg, #3A2810, #281808);
+  border: 1px solid #5A3818;
+  color: #C09060;
+  box-shadow: 0 1px 0 rgba(255,180,80,0.1) inset, 0 2px 6px rgba(0,0,0,0.5);
+}
+.dark[data-style="skeumorphic"] .back-btn:hover,
+.dark [data-style="skeumorphic"] .back-btn:hover {
+  color: #E0B060;
+  border-color: #C87840;
+}
+
+/* Row separators */
+.dark[data-style="skeumorphic"] .row-item:not(:last-child),
+.dark [data-style="skeumorphic"] .row-item:not(:last-child) {
+  border-bottom: 1px solid #3A2810;
+  box-shadow: 0 1px 0 rgba(255,180,80,0.05);
+}
+
+/* Tab indicator */
+.dark[data-style="skeumorphic"] .tab-indicator,
+.dark [data-style="skeumorphic"] .tab-indicator {
+  background: #C87840 !important;
+  box-shadow: 0 0 8px rgba(200,120,64,0.6) !important;
+}
+
+/* Divider */
+.dark[data-style="skeumorphic"] .divider-line,
+.dark [data-style="skeumorphic"] .divider-line {
+  background: #3A2810;
+  box-shadow: 0 1px 0 rgba(255,180,80,0.06);
+}
+
+/* H1 */
+.dark[data-style="skeumorphic"] h1,
+.dark [data-style="skeumorphic"] h1 {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,180,80,0.1);
+}
+
+/* Footer */
+.dark[data-style="skeumorphic"] .footer-sig,
+.dark [data-style="skeumorphic"] .footer-sig {
+  color: #C87840 !important;
+}
+
+/* Tooltip — dark brass plaque */
+.dark[data-style="skeumorphic"] [data-slot="tooltip-content"],
+.dark [data-style="skeumorphic"] [data-slot="tooltip-content"] {
+  background: linear-gradient(180deg, #4A3010 0%, #3A2008 100%) !important;
+  border: 1px solid #5A3818 !important;
+  box-shadow:
+    0 1px 0 rgba(255,200,100,0.12) inset,
+    0 2px 6px rgba(0,0,0,0.5) !important;
+  color: #E0C080 !important;
+  font-weight: 600 !important;
+}
+.dark[data-style="skeumorphic"] .tooltip-arrow,
+.dark [data-style="skeumorphic"] .tooltip-arrow {
+  background: #3A2008 !important;
+}
+.dark[data-style="skeumorphic"] .tooltip-arrow svg,
+.dark [data-style="skeumorphic"] .tooltip-arrow svg,
+.dark[data-style="skeumorphic"] .tooltip-arrow path,
+.dark [data-style="skeumorphic"] .tooltip-arrow path,
+.dark[data-style="skeumorphic"] .tooltip-arrow polygon,
+.dark [data-style="skeumorphic"] .tooltip-arrow polygon {
+  fill: #3A2008 !important;
+}

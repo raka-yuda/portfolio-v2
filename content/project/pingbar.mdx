@@ -1,0 +1,28 @@
+---
+title: Pingbar
+emoji: 📡
+description: A menubar app that pings your services and quietly nags you when latency drifts.
+story: ""
+techStack: [Swift, SwiftUI]
+tags: [UI, Frontend]
+link: ""
+source: "https://github.com/rakayuda/pingbar"
+image: ""
+featured: false
+publishedAt: "2024-02-14"
+isPublished: false
+---
+
+## The need
+
+I run a handful of personal services on a homelab. When one of them gets sluggish, I want to know *while I'm working*, not after I've already lost an hour wondering why my own blog feels slow.
+
+## What it shows
+
+A single dot in the macOS menu bar. Green for healthy, amber for sluggish, red for unreachable. Clicking the dot opens a small popover with a sparkline per service.
+
+## Constraints I gave myself
+
+- **No backend.** Everything runs on-device.
+- **Under 20MB of RAM.** Currently holding at 11.
+- **No analytics.** I don't need to know how anyone uses it.

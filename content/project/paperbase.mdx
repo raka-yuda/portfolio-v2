@@ -1,0 +1,26 @@
+---
+title: Paperbase
+emoji: 📒
+description: A local-first note app that syncs encrypted markdown files between devices over Tailscale.
+story: ""
+techStack: [Tauri, Rust, React]
+tags: [UI, Fullstack]
+link: ""
+source: "https://github.com/rakayuda/paperbase"
+image: ""
+featured: false
+publishedAt: "2024-04-02"
+isPublished: false
+---
+
+## Why
+
+Every cloud-first notes app I've tried eventually started getting in my way: weird syncing, vendor lock-in, surprise pricing changes. Paperbase is my reaction to that — markdown files on disk, optional sync, nothing more.
+
+## Architecture
+
+A small Tauri shell hosts a React editor. Sync is a Rust daemon that talks over the Tailscale tailnet, so there's no SaaS server in the loop at all.
+
+## Crypto
+
+Files are encrypted with age before they leave the device. Keys are stored in the OS keychain. If the daemon dies you still have the plaintext files locally — encryption is purely for transit and remote storage.

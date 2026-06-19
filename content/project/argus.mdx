@@ -1,0 +1,39 @@
+---
+title: Argus
+emoji: 🔍
+description: Lightweight backend monitoring service with anomaly detection and real-time alerting for distributed systems.
+story: ""
+techStack: [Node.js, Express, TimescaleDB]
+tags: [Backend, Fullstack]
+link: ""
+source: https://github.com/rakayuda/argus
+image: ""
+featured: true
+publishedAt: "2024-10-18"
+isPublished: false
+---
+
+## The itch
+
+I was tired of installing Datadog agents on weekend projects. Argus is the lightweight escape hatch — drop-in middleware, one Postgres extension, no SaaS dependency.
+
+## How it works
+
+Argus piggybacks on whatever HTTP framework you're already using:
+
+```js
+import { argus } from '@argus/express'
+app.use(argus({ store: 'timescale://localhost' }))
+```
+
+Behind the scenes it samples request latency, error rate, and queue depth into TimescaleDB continuous aggregates. A small WebSocket service streams the rolled-up metrics to the dashboard.
+
+## Detecting anomalies
+
+The detection layer is a rolling z-score over a 4-hour window. Anything past **±3σ** triggers a webhook. Not fancy — but it's caught real regressions twice now without a single false positive in production.
+
+## What's next
+
+- Better cardinality handling for tag-heavy endpoints
+- A k8s operator so I stop hand-rolling Helm charts
+- An OpenTelemetry exporter so people can keep their existing pipeline

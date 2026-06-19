@@ -1,0 +1,42 @@
+---
+title: "Building scalable React apps with feature-based architecture"
+description: "How to organize your React codebase so it actually scales with your team and product growth."
+publishedAt: "Oct 15"
+tags: [Frontend]
+image: ""
+featured: false
+isPublished: false
+---
+
+## Folder structure is the architecture
+
+Most React codebases I've inherited have the same illness: `components/`, `hooks/`, `utils/`, `pages/`. Looks tidy. Tells you nothing about what the app does.
+
+Switching to a feature-based layout doesn't change a single line of business logic, but it changes how onboarding feels:
+
+```
+src/
+  features/
+    billing/
+      api.ts
+      components/
+      hooks/
+      routes.ts
+    onboarding/
+      ...
+  shared/
+    ui/
+    lib/
+```
+
+A new engineer can now answer "where does billing live?" by reading the folder tree.
+
+## The rules I follow
+
+1. **Features own their UI, state, and API.** No cross-feature imports without going through `shared/`.
+2. **`shared/` is for things at least two features use.** Not "things that might be useful one day."
+3. **No `utils.ts` at the project root.** Ever.
+
+## When this falls apart
+
+Feature folders fall apart when features start sharing too much. If three features all need the same complicated UI, that UI is no longer a feature concern — it belongs in `shared/`. Don't fight that move. The cleanup is small. The mess from not moving it is not.

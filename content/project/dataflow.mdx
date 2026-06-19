@@ -1,0 +1,26 @@
+---
+title: DataFlow
+emoji: 🔀
+description: Real-time data pipeline visualization for monitoring distributed system workflows and tracing data movement.
+story: ""
+techStack: [React, Node.js, D3]
+tags: [Frontend, Fullstack]
+link: ""
+source: ""
+image: ""
+featured: false
+publishedAt: "2024-06-10"
+isPublished: false
+---
+
+## The problem
+
+In a microservice mesh, "where is my data right now" is usually answered by tailing five Slack channels. DataFlow tries to be the answer instead.
+
+## Visualisation
+
+The core view is a force-directed graph rendered with D3. Each node is a service; each edge is a stream of envelopes. Edges thicken with throughput and tint with error rate.
+
+## What I learned
+
+Drawing 4,000 edges in SVG at 60fps is not realistic. The second iteration moved to Canvas with WebGL fallback for very large graphs — which made the whole thing dramatically faster and slightly less pleasant to write.

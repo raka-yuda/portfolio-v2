@@ -1,0 +1,39 @@
+---
+title: "Why I switched from REST to GraphQL after 2 years"
+description: "The journey from over-fetching to precise data queries — and everything in between."
+publishedAt: "Nov 22"
+tags: [Frontend, Story]
+image: ""
+featured: true
+isPublished: false
+---
+
+## The breaking point
+
+For the first two years our app's API was a perfectly reasonable REST setup. Resources, verbs, sensible status codes. Then the mobile team asked for a screen that needed fragments of seven resources at once.
+
+We did what any reasonable team would do: we built a "summary" endpoint. Then another. Then another. By the time I noticed, we had **fourteen** bespoke aggregation endpoints, each subtly different, all written by exhausted humans at 2am.
+
+## Why GraphQL won, eventually
+
+It wasn't the schema. It wasn't the tooling. It was, embarrassingly, **the social contract** GraphQL introduced.
+
+- Frontend asks for exactly what it needs.
+- Backend documents what's possible.
+- The conversation between teams stops being "please add a field to the summary endpoint" and starts being "is the schema correct?"
+
+## What I miss about REST
+
+- Cacheability. HTTP caching is a real superpower we gave up.
+- Predictable cost per request.
+- The ability to read a request URL and know what it does.
+
+## What I don't miss
+
+- Bespoke aggregation endpoints.
+- The argument over PATCH semantics.
+- Versioning.
+
+## Would I do it again?
+
+For an app with a single backend and multiple varied clients, yes — instantly. For an internal microservice talking to one other microservice, no. REST is still better there. Pick the tool, not the trend.

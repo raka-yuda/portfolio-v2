@@ -1,0 +1,43 @@
+---
+title: Inkfolio
+emoji: 🖋️
+description: Minimal, customizable portfolio generator for creative professionals with zero-config setup and a focus on typography.
+story: ""
+techStack: [React, Vite, MDX]
+tags: [UI, Frontend]
+link: https://inkfolio.example.com
+source: https://github.com/rakayuda/inkfolio
+image: ""
+featured: false
+publishedAt: "2024-08-22"
+isPublished: false
+---
+
+## The pitch
+
+Most portfolio generators force you to think like a website builder. Inkfolio inverts the relationship — you write the content, it handles the rest.
+
+## Design principles
+
+1. **Typography is the design.** No splashy hero images, no parallax. The page is content-first.
+2. **One config file.** Colors, fonts, sections all live in `inkfolio.config.ts`.
+3. **MDX everywhere.** Project pages, blog posts, even the landing page is MDX.
+
+## Customising
+
+The defaults are intentionally opinionated, but every visual primitive is overridable:
+
+- `tokens.colors` — accent / background / text triad
+- `tokens.fonts` — display, body, mono
+- `tokens.spacing` — base unit cascade
+
+```ts
+export default defineConfig({
+  tokens: {
+    colors: { accent: '#622222', bg: '#FAF6E9' },
+    fonts: { display: 'Plus Jakarta Sans' },
+  },
+})
+```
+
+That's the whole API.
