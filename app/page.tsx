@@ -40,6 +40,7 @@ export default function HomePage() {
               fontSize: 30,
               color: 'var(--accent)',
               boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.06)',
+              letterSpacing: '4px',
             }}
           >
             R

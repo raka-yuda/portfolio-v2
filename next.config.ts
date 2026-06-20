@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'standalone',
   async redirects() {
     return [
       { source: '/projects', destination: '/project', permanent: true },
@@ -14,7 +14,10 @@ const nextConfig: NextConfig = {
       new URL('https://raw.githubusercontent.com/**')
     ],
   },
-  allowedDevOrigins: ['192.168.18.*'],
+  allowedDevOrigins: [
+    '192.168.18.*',
+    'https://*.ngrok-free.app'
+  ],
 };
 
 export default nextConfig;

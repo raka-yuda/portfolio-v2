@@ -28,14 +28,15 @@ const ThemeContext = createContext<ThemeContextValue>({
 
 export function ThemeContextProvider({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useNextTheme()
-  const [styleMode, setStyleModeState] = useState<StyleMode>(defaultStyleMode)
 
   // Restore persisted style on mount — dev only
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') return
-    const saved = localStorage.getItem('portfolio-style') as StyleMode | null
-    if (saved === 'modern' || saved === 'skeumorphic') setStyleModeState(saved)
-  }, [])
+  const [styleMode, setStyleModeState] = useState<StyleMode>(() => {
+    if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio-style') as StyleMode | null
+      if (saved === 'modern' || saved === 'skeumorphic') return saved
+    }
+    return defaultStyleMode
+  })
 
   const colorMode: ColorMode = theme === 'dark' ? 'dark' : 'light'
   const combined: CombinedTheme = `${colorMode}-${styleMode}` as CombinedTheme

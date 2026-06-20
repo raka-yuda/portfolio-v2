@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  portfolio-v2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: portfolio-v2:latest
+    container_name: portfolio-v2
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3005:3000"
+    env_file:
+      - .env.production
+    labels:
+      - "com.docker.compose.project=portfolio-v2"
+    networks:
+      - portfolio-v2
+
+networks:
+  portfolio-v2:
+    name: portfolio-v2
