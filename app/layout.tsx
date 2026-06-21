@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes'
 import { ThemeContextProvider } from '@/lib/theme'
 import { TweaksProvider } from '@/lib/tweaks'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import Script from 'next/script'
 import { BottomNav } from '@/components/organisms/BottomNav'
 import { TweaksPanel } from '@/components/organisms/TweaksPanel'
 import { Analytics } from '@/components/organisms/Analytics'
@@ -48,21 +49,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${caveat.variable}`}>
+      <head />
       <body className="font-sans antialiased">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var saved = localStorage.getItem('portfolio-style');
-                  if (saved === 'modern' || saved === 'skeumorphic') {
-                    document.documentElement.dataset.style = saved;
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
+        <Script id="theme-style" strategy="beforeInteractive">
+          {`
+            (function() {
+              try {
+                var saved = localStorage.getItem('portfolio-style');
+                if (saved === 'modern' || saved === 'skeumorphic') {
+                  document.documentElement.dataset.style = saved;
+                }
+              } catch (e) {}
+            })();
+          `}
+        </Script>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <ThemeContextProvider>
             <TweaksProvider>
