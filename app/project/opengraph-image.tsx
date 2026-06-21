@@ -1,11 +1,12 @@
 import { ImageResponse } from 'next/og'
-import { loadOgFont, ogFontConfig, OG_SIZE } from '@/lib/og'
+import { loadFavicon, loadOgFont, OgAvatar, ogFontConfig, OG_SIZE } from '@/lib/og'
 
 export const alt = 'Projects'
 export const size = OG_SIZE
 
 export default async function ProjectsOpenGraphImage() {
   const fontData = await loadOgFont()
+  const faviconData = loadFavicon()
 
   return new ImageResponse(
     (
@@ -22,22 +23,7 @@ export default async function ProjectsOpenGraphImage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: '50%',
-              background: '#18181B',
-              color: '#FAF6E9',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 28,
-              fontWeight: 700,
-            }}
-          >
-            R
-          </div>
+          <OgAvatar faviconData={faviconData} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>

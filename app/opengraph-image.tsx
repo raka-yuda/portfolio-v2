@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 import { SITE } from '@/lib/site'
+import { loadFavicon, OgAvatar } from '@/lib/og'
 
 export const alt = SITE.name
 export const size = { width: 1200, height: 630 }
@@ -20,6 +21,7 @@ async function loadFont() {
 
 export default async function OpenGraphImage() {
   const fontData = await loadFont()
+  const faviconData = loadFavicon()
   const fontConfig = fontData
     ? [{ name: 'Plus Jakarta Sans', data: fontData, style: 'normal' as const, weight: 700 as const }]
     : undefined
@@ -40,22 +42,7 @@ export default async function OpenGraphImage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: '50%',
-              background: '#18181B',
-              color: '#FAF6E9',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 28,
-              fontWeight: 700,
-            }}
-          >
-            R
-          </div>
+          <OgAvatar faviconData={faviconData} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -1,3 +1,5 @@
+import { HomeAvatar } from './HomeAvatar'
+
 interface AuthorRowProps {
   date?: string
   readTime?: string
@@ -10,7 +12,7 @@ export function AuthorRow({ date, readTime }: AuthorRowProps) {
       padding: '22px 0', borderBottom: '1px solid var(--border-soft)', marginBottom: 32,
     }}>
       <div className="author-info" style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-        <div className="neu-avatar author-avatar" style={{ width: 52, height: 52, borderRadius: '50%', background: 'var(--border-soft)', flexShrink: 0 }} />
+        <HomeAvatar size={52} interactive={false} className="neu-avatar author-avatar" />
         <div>
           <div className="author-name" style={{ fontWeight: 500, fontSize: 20, lineHeight: '100%' }}>Raka</div>
           <div className="author-role" style={{ fontSize: 15, color: 'var(--text-soft)', marginTop: 5 }}>Software Engineer</div>

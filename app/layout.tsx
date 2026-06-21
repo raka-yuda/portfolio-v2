@@ -31,6 +31,11 @@ export const metadata: Metadata = {
   creator: SITE.fullName,
   keywords: ['Raka', 'Software Engineer', 'Portfolio', 'Frontend', 'Backend', 'React', 'Next.js'],
   alternates: { canonical: '/' },
+  icons: {
+    icon: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
+    shortcut: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
+    apple: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
+  },
   openGraph: {
     type: 'website', locale: 'en_US', url: SITE.url, siteName: SITE.name,
     title: `${SITE.name} — Personal Portfolio Website`, description: SITE.description,

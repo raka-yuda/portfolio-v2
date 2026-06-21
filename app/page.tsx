@@ -5,6 +5,7 @@ import { Footer } from '@/components/molecules/Footer'
 import { PageLayout } from '@/components/templates/PageLayout'
 import { IcoDl, IcoMail, IcoLinkedin, IcoGithub, IcoLeetcode, IcoHackerrank } from '@/components/atoms/Icons'
 import { CvButton } from '@/components/molecules/CvButton'
+import { HomeAvatar } from '@/components/molecules/HomeAvatar'
 import { getAllProjects, getAllBlogPosts } from '@/lib/mdx'
 
 
@@ -25,27 +26,7 @@ export default function HomePage() {
       {/* Profile */}
       <div className="home-avatar-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32 }}>
         <div className="home-avatar-wrap" style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
-          <div
-            className="neu-avatar home-avatar"
-            style={{
-              width: 68,
-              height: 68,
-              borderRadius: '50%',
-              flexShrink: 0,
-              background:
-                'linear-gradient(135deg, var(--placeholder-grad-1) 0%, var(--placeholder-grad-2) 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontFamily: 'var(--font-caveat)',
-              fontSize: 30,
-              color: 'var(--accent)',
-              boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.06)',
-              letterSpacing: '4px',
-            }}
-          >
-            R
-          </div>
+          <HomeAvatar />
           <div>
             <div className="home-name" style={{ fontWeight: 600, fontSize: 22, lineHeight: '100%', letterSpacing: '-0.01em' }}>Raka <span className="home-name__last opacity-50" style={{ color: 'var(--text-soft)' }}>Yuda Pradipta</span></div> 
             <div className="home-role" style={{ fontSize: 15, color: 'var(--text-soft)', marginTop: 6 }}>Software Engineer</div>
