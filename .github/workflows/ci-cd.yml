@@ -48,6 +48,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Create .env.production
+        run: |
+          echo "NEXT_PUBLIC_SITE_URL=${{ env.SITE_URL }}" > .env.production
+          echo "NODE_ENV=production" >> .env.production
+          echo "NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ secrets.UMAMI_WEBSITE_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_UMAMI_SCRIPT_URL=${{ secrets.UMAMI_SCRIPT_URL }}" >> .env.production
+
       - name: Build Next.js app
         run: npm run build
 
