@@ -49,6 +49,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${caveat.variable}`}>
       <body className="font-sans antialiased">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('portfolio-style');
+                  if (saved === 'modern' || saved === 'skeumorphic') {
+                    document.documentElement.dataset.style = saved;
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <ThemeContextProvider>
             <TweaksProvider>

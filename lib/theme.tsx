@@ -29,14 +29,9 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeContextProvider({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useNextTheme()
 
-  // Restore persisted style on mount
-  const [styleMode, setStyleModeState] = useState<StyleMode>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('portfolio-style') as StyleMode | null
-      if (saved === 'modern' || saved === 'skeumorphic') return saved
-    }
-    return defaultStyleMode
-  })
+  // Default state must match SSR to avoid hydration mismatch.
+  // The real persisted value is read in useEffect after hydration.
+  const [styleMode, setStyleModeState] = useState<StyleMode>(defaultStyleMode)
 
   const colorMode: ColorMode = theme === 'dark' ? 'dark' : 'light'
   const combined: CombinedTheme = `${colorMode}-${styleMode}` as CombinedTheme
@@ -50,10 +45,17 @@ export function ThemeContextProvider({ children }: { children: React.ReactNode }
     document.documentElement.dataset.style = m
   }
 
-  // Keep data-style in sync
+  // Restore persisted style after hydration and keep data-style in sync
   useEffect(() => {
-    document.documentElement.dataset.style = styleMode
-  }, [styleMode])
+    if (typeof window === 'undefined') return
+    const saved = localStorage.getItem('portfolio-style') as StyleMode | null
+    if (saved === 'modern' || saved === 'skeumorphic') {
+      setStyleModeState(saved)
+      document.documentElement.dataset.style = saved
+    } else {
+      document.documentElement.dataset.style = styleMode
+    }
+  }, [])
 
   return (
     <ThemeContext.Provider value={{ colorMode, styleMode, combined, setColorMode, setStyleMode, toggleColorMode }}>
