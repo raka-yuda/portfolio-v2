@@ -63,6 +63,22 @@ export const IcoBack = ({ s = 18 }: IcoProps) => (
   </svg>
 )
 
+export const IcoInstagram = ({ s = 22 }: IcoProps) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </svg>
+)
+
+export const IcoGlobe = ({ s = 22 }: IcoProps) => (
+  <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="2" y1="12" x2="22" y2="12"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+  </svg>
+)
+
 export const IcoLeetcode = ({ s = 28 }: IcoProps) => (
   <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor">
     <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.334 2.617 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.545 2.545 0 0 1 .685-1.687L9.13 8.114c.893-.912 2.354-.913 3.25-.001l1.371 1.383c.524.525 1.399.521 1.955-.003a1.38 1.38 0 0 0-.003-1.955L14.24 6.106a5.478 5.478 0 0 0-3.688-1.438 5.35 5.35 0 0 0-3 .937z"/>

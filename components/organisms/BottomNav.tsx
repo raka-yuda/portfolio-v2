@@ -16,14 +16,16 @@ export function BottomNav() {
   const { toggleColorMode } = useTheme()
   const { tabVisible, toggleTab } = useTweaks()
   const [expanded, setExpanded] = useState(false)
+  const [spinning, setSpinning] = useState(false)
+  const spinTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  if (pathname === '/links') return null
 
   const isHome = pathname === '/'
   const isProjects = pathname.startsWith('/project')
   const isBlogs = pathname.startsWith('/blog')
 
   const scrollUp = () => window.scrollTo({ top: 0, behavior: 'smooth' })
-  const [spinning, setSpinning] = useState(false)
-  const spinTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handleThemeToggle = () => {
     toggleColorMode()

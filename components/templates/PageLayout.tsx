@@ -2,6 +2,7 @@ interface PageLayoutProps {
   children: React.ReactNode
   /** Aria landmark label — defaults to "main content" */
   label?: string
+  className?: string
 }
 
 /**
@@ -11,9 +12,9 @@ interface PageLayoutProps {
  *  - semantic <main> landmark for screen readers and SEO
  *  - consistent bottom clearance above the fixed nav bar
  */
-export function PageLayout({ children, label = 'main content' }: PageLayoutProps) {
+export function PageLayout({ children, label = 'main content', className }: PageLayoutProps) {
   return (
-    <main aria-label={label} className="page-in layout-container">
+    <main aria-label={label} className={`page-in layout-container ${className ?? ''}`.trim()}>
       {children}
     </main>
   )

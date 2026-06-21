@@ -281,6 +281,13 @@ button {
   .layout-container { padding: 32px 20px 120px; }
 }
 
+.layout-container.links-page {
+  padding-bottom: 60px;
+}
+@media (max-width: 640px) {
+  .layout-container.links-page { padding-bottom: 40px; }
+}
+
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
