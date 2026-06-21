@@ -9,5 +9,8 @@ export const SITE = {
   links: {
     github: 'https://github.com/rakayuda',
     linkedin: 'https://linkedin.com/in/rakayuda',
+    instagram: 'https://www.instagram.com/raka_yuda',
+    shutterstock: '',
+    pexels: '',
   },
 }
