@@ -6,11 +6,11 @@ import { Divider } from '@/components/molecules/Divider'
 import { Footer } from '@/components/molecules/Footer'
 import { ImgPh } from '@/components/atoms/ImagePlaceholder'
 import { Tag } from '@/components/atoms/Tag'
-import { ProjectItem } from '@/components/molecules/ProjectItem'
 import { IcoBack, IcoLink, IcoGithub } from '@/components/atoms/Icons'
 import { getAllProjects, getProject } from '@/lib/mdx'
 import { MdxContent } from '@/components/organisms/MdxContent'
 import { SITE } from '@/lib/site'
+import { OtherProjects } from '@/components/organisms/OtherProjects'
 
 export async function generateStaticParams() {
   return getAllProjects().map((p) => ({ slug: p.slug }))
@@ -51,7 +51,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     notFound()
   }
 
-  const others = getAllProjects().filter((p) => p.slug !== slug).slice(0, 2)
+  const allProjects = getAllProjects()
+  const currentIndex = allProjects.findIndex((p) => p.slug === slug)
+  const others = Array.from(
+    new Set([
+      allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length],
+      allProjects[(currentIndex + 1) % allProjects.length],
+    ])
+  )
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -145,7 +152,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <div style={{ paddingTop: 32, borderTop: '1px solid var(--border-soft)', marginBottom: 40 }}>
           <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 24 }}>Another Projects</div>
           <div className="stagger grid-2">
-            {others.map((p) => <ProjectItem key={p.slug} project={p} variant="card" />)}
+            <OtherProjects projects={others} />
           </div>
         </div>
       )}
