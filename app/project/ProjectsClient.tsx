@@ -7,8 +7,6 @@ import { FilterTabs } from '@/components/organisms/FilterTabs'
 import { useContentFilter } from '@/lib/use-content-filter'
 import type { Project } from '@/types'
 
-const CATS = ['UI', 'Frontend', 'Backend', 'Fullstack']
-
 export function ProjectsClient({ projects }: { projects: Project[] }) {
   const { tabs: catTabs, activeTab: cat, setActiveTab: setCat, filtered: byCategory } =
     useContentFilter(projects, { filterKey: 'tags'})

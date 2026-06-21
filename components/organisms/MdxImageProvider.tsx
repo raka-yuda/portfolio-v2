@@ -192,6 +192,7 @@ function Lightbox() {
         </button>
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', maxWidth: '100%', maxHeight: '100%' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             key={openIndex}
             src={image.src}
@@ -281,6 +282,7 @@ function Lightbox() {
                   transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease',
                 }}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={img.src}
                   alt={img.alt}

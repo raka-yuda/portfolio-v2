@@ -1,12 +1,13 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useCallback, useSyncExternalStore } from 'react'
 import { useTheme as useNextTheme } from 'next-themes'
 
 type StyleMode = 'modern' | 'skeumorphic'
 type ColorMode = 'light' | 'dark'
 type CombinedTheme = 'light-modern' | 'dark-modern' | 'light-skeumorphic' | 'dark-skeumorphic'
 const defaultStyleMode: StyleMode = 'skeumorphic'
+const STORAGE_KEY = 'portfolio-style'
 
 interface ThemeContextValue {
   colorMode: ColorMode
@@ -26,12 +27,27 @@ const ThemeContext = createContext<ThemeContextValue>({
   toggleColorMode: () => {},
 })
 
+function getServerStyle(): StyleMode {
+  return defaultStyleMode
+}
+
+function getClientStyle(): StyleMode {
+  if (typeof window === 'undefined') return defaultStyleMode
+  const saved = localStorage.getItem(STORAGE_KEY) as StyleMode | null
+  return saved === 'modern' || saved === 'skeumorphic' ? saved : defaultStyleMode
+}
+
+function subscribe(onChange: () => void) {
+  const handler = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY) onChange()
+  }
+  window.addEventListener('storage', handler)
+  return () => window.removeEventListener('storage', handler)
+}
+
 export function ThemeContextProvider({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useNextTheme()
-
-  // Default state must match SSR to avoid hydration mismatch.
-  // The real persisted value is read in useEffect after hydration.
-  const [styleMode, setStyleModeState] = useState<StyleMode>(defaultStyleMode)
+  const styleMode = useSyncExternalStore(subscribe, getClientStyle, getServerStyle)
 
   const colorMode: ColorMode = theme === 'dark' ? 'dark' : 'light'
   const combined: CombinedTheme = `${colorMode}-${styleMode}` as CombinedTheme
@@ -39,23 +55,17 @@ export function ThemeContextProvider({ children }: { children: React.ReactNode }
   const setColorMode = (m: ColorMode) => setTheme(m)
   const toggleColorMode = () => setTheme(colorMode === 'dark' ? 'light' : 'dark')
 
-  const setStyleMode = (m: StyleMode) => {
-    setStyleModeState(m)
-    localStorage.setItem('portfolio-style', m)
+  const setStyleMode = useCallback((m: StyleMode) => {
+    localStorage.setItem(STORAGE_KEY, m)
     document.documentElement.dataset.style = m
-  }
-
-  // Restore persisted style after hydration and keep data-style in sync
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const saved = localStorage.getItem('portfolio-style') as StyleMode | null
-    if (saved === 'modern' || saved === 'skeumorphic') {
-      setStyleModeState(saved)
-      document.documentElement.dataset.style = saved
-    } else {
-      document.documentElement.dataset.style = styleMode
-    }
+    // Trigger a re-render in the same tab since localStorage doesn't fire storage events there
+    window.dispatchEvent(new StorageEvent('storage', { key: STORAGE_KEY }))
   }, [])
+
+  // Keep data-style in sync with the store value
+  useEffect(() => {
+    document.documentElement.dataset.style = styleMode
+  }, [styleMode])
 
   return (
     <ThemeContext.Provider value={{ colorMode, styleMode, combined, setColorMode, setStyleMode, toggleColorMode }}>

@@ -13,7 +13,7 @@ const ACCENT = '#622222'
 
 export function BottomNav() {
   const pathname = usePathname()
-  const { colorMode, toggleColorMode } = useTheme()
+  const { toggleColorMode } = useTheme()
   const { tabVisible, toggleTab } = useTweaks()
   const [expanded, setExpanded] = useState(false)
 

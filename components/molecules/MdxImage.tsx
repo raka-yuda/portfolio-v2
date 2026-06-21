@@ -45,6 +45,7 @@ export function MdxImage({ src, alt = '', title, caption }: MdxImageProps) {
           touchAction: 'manipulation',
         }}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={alt}
