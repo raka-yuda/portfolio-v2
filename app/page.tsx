@@ -4,6 +4,7 @@ import { BlogItem } from '@/components/molecules/BlogItem'
 import { Footer } from '@/components/molecules/Footer'
 import { PageLayout } from '@/components/templates/PageLayout'
 import { IcoDl, IcoMail, IcoLinkedin, IcoGithub, IcoLeetcode, IcoHackerrank } from '@/components/atoms/Icons'
+import { CvButton } from '@/components/molecules/CvButton'
 import { getAllProjects, getAllBlogPosts } from '@/lib/mdx'
 
 
@@ -73,10 +74,8 @@ export default function HomePage() {
         }}
       >
         <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-soft)' }}>To get to know me well</span>
-        <a
+        <CvButton
           href="https://drive.google.com/file/d/1a9YjYOATrxUrF92H3NLBVeja2GIy9s5K/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 7,
             padding: '9px 16px',
@@ -93,7 +92,7 @@ export default function HomePage() {
           }}
         >
           <IcoDl /> CV
-        </a>
+        </CvButton>
       </div>
 
       {/* Personal Projects */}
