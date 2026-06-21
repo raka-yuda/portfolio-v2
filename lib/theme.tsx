@@ -29,9 +29,9 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeContextProvider({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useNextTheme()
 
-  // Restore persisted style on mount — dev only
+  // Restore persisted style on mount
   const [styleMode, setStyleModeState] = useState<StyleMode>(() => {
-    if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('portfolio-style') as StyleMode | null
       if (saved === 'modern' || saved === 'skeumorphic') return saved
     }

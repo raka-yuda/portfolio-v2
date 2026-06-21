@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { ImgPh } from '@/components/atoms/ImagePlaceholder'
 import { formatDate } from '@/lib/utils'
+import { track } from '@/lib/analytics'
 import type { BlogPost } from '@/types'
 
 interface BlogItemProps {
@@ -18,6 +21,7 @@ function BlogCard({ post }: { post: BlogPost }) {
       href={`/blog/${post.slug}`}
       className="card-lift"
       style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit', minHeight: 280 }}
+      onClick={() => track('blog_click', { slug: post.slug, title: post.title })}
     >
       <div className="card-img">
         <ImgPh h={148} src={post.image} alt={post.title} label={initials(post.title)} />
@@ -42,6 +46,7 @@ function BlogRow({ post }: { post: BlogPost }) {
       href={`/blog/${post.slug}`}
       className="row-item"
       style={{ padding: '24px 4px', display: 'block', textDecoration: 'none', color: 'inherit' }}
+      onClick={() => track('blog_click', { slug: post.slug, title: post.title })}
     >
       <div className="row-stack">
         <div style={{ flex: 1, minWidth: 0 }}>

@@ -6,6 +6,7 @@ import { TweaksProvider } from '@/lib/tweaks'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { BottomNav } from '@/components/organisms/BottomNav'
 import { TweaksPanel } from '@/components/organisms/TweaksPanel'
+import { Analytics } from '@/components/organisms/Analytics'
 import { SITE } from '@/lib/site'
 import './globals.css'
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
               <BottomNav />
               <TweaksPanel />
+              <Analytics />
               </TooltipProvider>
             </TweaksProvider>
           </ThemeContextProvider>
