@@ -8,6 +8,7 @@ export interface ProjectFrontmatter {
   link?: string
   source?: string
   image: string
+  blurhash?: string
   featured: boolean
   publishedAt: string
   isPublished: boolean
@@ -24,6 +25,7 @@ export interface BlogFrontmatter {
   publishedAt: string
   tags: string[]
   image: string
+  blurhash?: string
   featured: boolean
   isPublished: boolean
 }

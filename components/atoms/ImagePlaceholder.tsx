@@ -1,4 +1,8 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
+import { Blurhash } from 'react-blurhash'
 
 interface ImgPhProps {
   h?: number
@@ -6,13 +10,15 @@ interface ImgPhProps {
   alt?: string
   emoji?: string
   label?: string
+  blurhash?: string
 }
 
-export function ImgPh({ h = 139, src, alt = '', emoji, label }: ImgPhProps) {
+export function ImgPh({ h = 139, src, alt = '', emoji, label, blurhash }: ImgPhProps) {
+  const [loaded, setLoaded] = useState(false)
+
   return (
     <div
       aria-label={alt}
-      // className="img-placeholder"
       style={{
         width: '100%',
         height: h,
@@ -23,20 +29,42 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label }: ImgPhProps) {
         justifyContent: 'center',
         overflow: 'hidden',
         borderRadius: 4,
-        padding: "16px",
+        padding: '16px',
         background: src
           ? 'linear-gradient(135deg, var(--placeholder-grad-1) 0%, var(--placeholder-grad-2) 0%, transparent 100%)'
           : 'linear-gradient(135deg, var(--placeholder-grad-1) 0%, var(--placeholder-grad-2) 100%)',
       }}
     >
-      {/* Real image as base layer */}
-      {src && 
-        <div style={{ position: 'absolute', inset: 0, padding: 16 }}>
-          <Image src={src} alt={alt} fill style={{ objectFit: 'cover', zIndex: -1 }} loading='eager'/>
-        </div> 
-      }
+      {/* Blurhash placeholder */}
+      {src && blurhash && !loaded && (
+        <div style={{ position: 'absolute', inset: 0, zIndex: -2 }}>
+          <Blurhash
+            hash={blurhash}
+            width={32}
+            height={32}
+            resolutionX={32}
+            resolutionY={32}
+            punch={1}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </div>
+      )}
 
-      {/* Dot grain — on top of image */}
+      {/* Real image */}
+      {src && (
+        <div style={{ position: 'absolute', inset: 0, padding: 16, zIndex: -1, opacity: loaded ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            style={{ objectFit: 'cover' }}
+            loading="eager"
+            onLoad={() => setLoaded(true)}
+          />
+        </div>
+      )}
+
+      {/* Dot grain */}
       <div
         aria-hidden
         style={{
@@ -49,7 +77,7 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label }: ImgPhProps) {
         }}
       />
 
-      {/* Accent wash — on top of image */}
+      {/* Accent wash */}
       <div
         aria-hidden
         style={{
@@ -62,7 +90,7 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label }: ImgPhProps) {
         }}
       />
 
-      {/* Emoji or initials label — only when no real image */}
+      {/* Emoji or initials label */}
       {emoji && (
         <span
           style={{

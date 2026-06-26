@@ -24,7 +24,7 @@ function BlogCard({ post }: { post: BlogPost }) {
       onClick={() => track('blog_click', { slug: post.slug, title: post.title })}
     >
       <div className="card-img">
-        <ImgPh h={148} src={post.image} alt={post.title} label={initials(post.title)} />
+        <ImgPh h={148} src={post.image} alt={post.title} label={initials(post.title)} blurhash={post.blurhash} />
       </div>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: 16, gap: 12 }}>
         <div className="flex flex-col gap-2">
@@ -59,7 +59,7 @@ function BlogRow({ post }: { post: BlogPost }) {
           </div>
         </div>
         <div className="row-thumb">
-          <ImgPh h={112} src={post.image} alt={post.title} label={initials(post.title)} />
+          <ImgPh h={112} src={post.image} alt={post.title} label={initials(post.title)} blurhash={post.blurhash} />
         </div>
       </div>
     </Link>

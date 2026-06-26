@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {post.title}
       </h1>
       <AuthorRow date={formatDate(post.publishedAt)} readTime={post.readingTime} />
-      <ImgPh h={200} label="article image" src={post.image} />
+      <ImgPh h={200} label="article image" src={post.image} blurhash={post.blurhash} />
 
       <div style={{ position: 'relative', marginTop: 40 }}>
         <TableOfContents items={toc} />

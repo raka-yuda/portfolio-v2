@@ -79,7 +79,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         {project.title} {project.emoji}
       </h1>
       <Divider />
-      <ImgPh h={200} label="project screenshot" src={project.image} alt={project.title} emoji={project.emoji}/>
+      <ImgPh h={200} label="project screenshot" src={project.image} alt={project.title} emoji={project.emoji} blurhash={project.blurhash}/>
 
       <div style={{ marginTop: 40, marginBottom: 40 }}>
         <div style={{ fontWeight: 500, fontSize: 17, marginBottom: 14 }}>Description</div>

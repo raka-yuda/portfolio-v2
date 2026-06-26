@@ -26,7 +26,7 @@ function ProjectCard({ project }: { project: Project }) {
       onClick={() => track('project_click', { slug: project.slug, title: project.title })}
     >
       <div className="card-img">
-        <ImgPh h={148} src={project.image} alt={project.title} emoji={project.emoji} />
+        <ImgPh h={148} src={project.image} alt={project.title} emoji={project.emoji} blurhash={project.blurhash} />
       </div>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 16, gap: 8 }}>
         <div style={{ fontWeight: 600, fontSize: 17, lineHeight: '130%' }}>
@@ -77,7 +77,7 @@ function ProjectRow({ project }: { project: Project }) {
           </div>
         </div>
         <div className="row-thumb">
-          <ImgPh h={112} src={project.image} alt={project.title} emoji={project.emoji} />
+          <ImgPh h={112} src={project.image} alt={project.title} emoji={project.emoji} blurhash={project.blurhash} />
         </div>
       </div>
     </div>

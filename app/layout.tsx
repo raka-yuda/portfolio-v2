@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   icons: {
     icon: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
     shortcut: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
-    apple: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
   },
   openGraph: {
     type: 'website', locale: 'en_US', url: SITE.url, siteName: SITE.name,
