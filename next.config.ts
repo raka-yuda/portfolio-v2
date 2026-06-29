@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
       new URL('https://images.pexels.com/**'),
       new URL('https://raw.githubusercontent.com/**')
     ],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 86400,
   },
   allowedDevOrigins: [
     '192.168.18.*',

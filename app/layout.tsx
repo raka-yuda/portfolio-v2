@@ -12,8 +12,8 @@ import './globals.css'
 const BottomNav = dynamic(() => import('@/components/organisms/BottomNav').then(m => ({ default: m.BottomNav })))
 const TweaksPanel = dynamic(() => import('@/components/organisms/TweaksPanel').then(m => ({ default: m.TweaksPanel })))
 
-const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta' })
-const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', preload: false })
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-jakarta' })
+const caveat = Caveat({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-caveat', preload: false })
 
 export const viewport: Viewport = {
   themeColor: [
@@ -55,7 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${caveat.variable}`}>
-      <head />
+      <head>
+        <link rel="preconnect" href="https://raw.githubusercontent.com" />
+        <link rel="preconnect" href="https://images.pexels.com" />
+        <link rel="dns-prefetch" href="https://raw.githubusercontent.com" />
+        <link rel="dns-prefetch" href="https://images.pexels.com" />
+      </head>
       <body className="font-sans antialiased">
         <script dangerouslySetInnerHTML={{
           __html: `(function(){try{var s=localStorage.getItem('portfolio-style');if(s==='modern'||s==='skeumorphic'){document.documentElement.dataset.style=s;}}catch(e){}})();`

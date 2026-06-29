@@ -50,7 +50,7 @@ export function ImgPh({
 
       {/* Real image */}
       {src && (
-        <div style={{ position: 'absolute', inset: 0, padding: 16, zIndex: 1 }}>
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
           <Image
             src={src}
             alt={alt}
@@ -59,6 +59,7 @@ export function ImgPh({
             style={{ objectFit: 'cover' }}
             loading={priority ? 'eager' : 'lazy'}
             priority={priority}
+            fetchPriority={priority ? 'high' : 'auto'}
           />
         </div>
       )}

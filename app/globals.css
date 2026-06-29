@@ -262,10 +262,10 @@ button {
 .page-in { animation: pgIn 0.28s cubic-bezier(0.4,0,0.2,1) backwards; }
 
 @keyframes pgInFade {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: none; }
+  from { opacity: 0.01; filter: blur(4px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
 }
-.page-in-fade { animation: pgInFade 0.28s cubic-bezier(0.4,0,0.2,1) backwards; }
+.page-in-fade { animation: pgInFade 0.6s cubic-bezier(0.4,0,0.2,1) backwards; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }

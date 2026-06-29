@@ -22,7 +22,7 @@ export default function HomePage() {
   ]
 
   return (
-    <PageLayout>
+    <PageLayout fade>
       {/* Profile */}
       <div className="home-avatar-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32 }}>
         <div className="home-avatar-wrap" style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
