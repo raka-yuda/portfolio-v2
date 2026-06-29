@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useTheme } from '@/lib/theme'
 import { useTweaks } from '@/lib/tweaks'
 import { IcoHome, IcoTarget, IcoFile, IcoRepeat, IcoArrowUp } from '@/components/atoms/Icons'
-import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip'
 import { ChevronRight, Wrench } from 'lucide-react'
 
 const ACCENT = '#622222'
@@ -52,6 +52,7 @@ export function BottomNav() {
   }
 
   return (
+    <TooltipProvider>
     <div
       className="bottom-nav"
       style={{
@@ -154,5 +155,6 @@ export function BottomNav() {
         </div>
       </div>
     </div>
+    </TooltipProvider>
   )
 }

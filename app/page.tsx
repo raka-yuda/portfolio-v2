@@ -80,13 +80,13 @@ export default function HomePage() {
       <section style={{ marginBottom: 56 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 22 }}>
           <span style={{ fontWeight: 700, fontSize: 17, letterSpacing: '-0.005em' }}>Personal Projects</span>
-          <Link href="/project" className="more-link">
+          <Link href="/project" className="more-link" prefetch={false}>
             <span className="more-link__text">More</span>
             <span className="more-link__plus">+</span>
           </Link>
         </div>
         <div className="stagger grid-2">
-          {projects.map((p) => <ProjectItem key={p.slug} project={p} variant="card" />)}
+          {projects.map((p, i) => <ProjectItem key={p.slug} project={p} variant="card" priority={i === 0} />)}
         </div>
       </section>
 
@@ -94,7 +94,7 @@ export default function HomePage() {
       <section style={{ marginBottom: 56 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 22 }}>
           <span style={{ fontWeight: 700, fontSize: 17, letterSpacing: '-0.005em' }}>Blog</span>
-          <Link href="/blog" className="more-link">
+          <Link href="/blog" className="more-link" prefetch={false}>
             <span className="more-link__text">More</span>
             <span className="more-link__plus">+</span>
           </Link>

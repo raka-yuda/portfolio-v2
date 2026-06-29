@@ -1,14 +1,12 @@
-'use client'
-
 import Link from 'next/link'
 import { ImgPh } from '@/components/atoms/ImagePlaceholder'
 import { IcoLink, IcoGithub } from '@/components/atoms/Icons'
-import { track } from '@/lib/analytics'
 import type { Project } from '@/types'
 
 interface ProjectItemProps {
   project: Project
   variant: 'card' | 'row'
+  priority?: boolean
 }
 
 const actionBtnStyle: React.CSSProperties = {
@@ -17,16 +15,25 @@ const actionBtnStyle: React.CSSProperties = {
   color: 'var(--text-base)', fontSize: 14, border: 'none',
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, priority }: { project: Project; priority?: boolean }) {
   return (
     <Link
       href={`/project/${project.slug}`}
       className="card-lift"
       style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit', minHeight: 300 }}
-      onClick={() => track('project_click', { slug: project.slug, title: project.title })}
+      data-track="project_click" data-track-slug={project.slug} data-track-title={project.title}
+      prefetch={false}
     >
       <div className="card-img">
-        <ImgPh h={148} src={project.image} alt={project.title} emoji={project.emoji} blurhash={project.blurhash} />
+        <ImgPh
+          h={148}
+          src={project.image}
+          alt={project.title}
+          emoji={project.emoji}
+          blurhash={project.blurhash}
+          priority={priority}
+          sizes="(max-width: 640px) 100vw, 50vw"
+        />
       </div>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 16, gap: 8 }}>
         <div style={{ fontWeight: 600, fontSize: 17, lineHeight: '130%' }}>
@@ -42,7 +49,7 @@ function ProjectRow({ project }: { project: Project }) {
   const href = `/project/${project.slug}`
   return (
     <div className="row-item" style={{ position: 'relative', padding: '24px 4px' }}>
-      <Link href={href} aria-label={project.title} style={{ position: 'absolute', inset: 0, zIndex: 0 }} onClick={() => track('project_click', { slug: project.slug, title: project.title })} />
+      <Link href={href} aria-label={project.title} style={{ position: 'absolute', inset: 0, zIndex: 0 }} data-track="project_click" data-track-slug={project.slug} data-track-title={project.title} prefetch={false} />
       <div className="row-stack" style={{ position: 'relative', pointerEvents: 'none' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontWeight: 500, fontSize: 20, lineHeight: '100%', marginBottom: 12 }}>
@@ -58,7 +65,7 @@ function ProjectRow({ project }: { project: Project }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={actionBtnStyle}
-                onClick={() => track('project_link_click', { slug: project.slug, title: project.title, url: project.link ?? '' })}
+                data-track="project_link_click" data-track-slug={project.slug} data-track-title={project.title} data-track-url={project.link ?? ''}
               >
                 <IcoLink /> Link
               </a>
@@ -69,7 +76,7 @@ function ProjectRow({ project }: { project: Project }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={actionBtnStyle}
-                onClick={() => track('project_source_click', { slug: project.slug, title: project.title, url: project.source ?? '' })}
+                data-track="project_source_click" data-track-slug={project.slug} data-track-title={project.title} data-track-url={project.source ?? ''}
               >
                 <IcoGithub s={13} /> Source
               </a>
@@ -77,13 +84,20 @@ function ProjectRow({ project }: { project: Project }) {
           </div>
         </div>
         <div className="row-thumb">
-          <ImgPh h={112} src={project.image} alt={project.title} emoji={project.emoji} blurhash={project.blurhash} />
+          <ImgPh
+            h={112}
+            src={project.image}
+            alt={project.title}
+            emoji={project.emoji}
+            blurhash={project.blurhash}
+            sizes="(max-width: 640px) 100vw, 188px"
+          />
         </div>
       </div>
     </div>
   )
 }
 
-export function ProjectItem({ project, variant }: ProjectItemProps) {
-  return variant === 'card' ? <ProjectCard project={project} /> : <ProjectRow project={project} />
+export function ProjectItem({ project, variant, priority }: ProjectItemProps) {
+  return variant === 'card' ? <ProjectCard project={project} priority={priority} /> : <ProjectRow project={project} />
 }

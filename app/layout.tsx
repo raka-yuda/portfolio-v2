@@ -1,18 +1,19 @@
 import type { Metadata, Viewport } from 'next'
+import dynamic from 'next/dynamic'
 import { Plus_Jakarta_Sans, Caveat } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import { ThemeContextProvider } from '@/lib/theme'
 import { TweaksProvider } from '@/lib/tweaks'
-import { TooltipProvider } from '@/components/ui/tooltip'
-import Script from 'next/script'
-import { BottomNav } from '@/components/organisms/BottomNav'
-import { TweaksPanel } from '@/components/organisms/TweaksPanel'
 import { Analytics } from '@/components/organisms/Analytics'
+import { AnalyticsTracker } from '@/components/organisms/AnalyticsTracker'
 import { SITE } from '@/lib/site'
 import './globals.css'
 
+const BottomNav = dynamic(() => import('@/components/organisms/BottomNav').then(m => ({ default: m.BottomNav })))
+const TweaksPanel = dynamic(() => import('@/components/organisms/TweaksPanel').then(m => ({ default: m.TweaksPanel })))
+
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta' })
-const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat' })
+const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat', preload: false })
 
 export const viewport: Viewport = {
   themeColor: [
@@ -32,8 +33,8 @@ export const metadata: Metadata = {
   keywords: ['Raka', 'Software Engineer', 'Portfolio', 'Frontend', 'Backend', 'React', 'Next.js'],
   alternates: { canonical: '/' },
   icons: {
-    icon: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
-    shortcut: { url: '/favicon.png', sizes: '480x480', type: 'image/png' },
+    icon: { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    shortcut: { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     apple: { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
   },
   openGraph: {
@@ -56,27 +57,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${caveat.variable}`}>
       <head />
       <body className="font-sans antialiased">
-        <Script id="theme-style" strategy="beforeInteractive">
-          {`
-            (function() {
-              try {
-                var saved = localStorage.getItem('portfolio-style');
-                if (saved === 'modern' || saved === 'skeumorphic') {
-                  document.documentElement.dataset.style = saved;
-                }
-              } catch (e) {}
-            })();
-          `}
-        </Script>
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(){try{var s=localStorage.getItem('portfolio-style');if(s==='modern'||s==='skeumorphic'){document.documentElement.dataset.style=s;}}catch(e){}})();`
+        }} />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <ThemeContextProvider>
             <TweaksProvider>
-              <TooltipProvider>
               {children}
               <BottomNav />
               <TweaksPanel />
               <Analytics />
-              </TooltipProvider>
+              <AnalyticsTracker />
             </TweaksProvider>
           </ThemeContextProvider>
         </ThemeProvider>

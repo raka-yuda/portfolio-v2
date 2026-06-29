@@ -17,12 +17,21 @@ export async function loadOgFont(): Promise<ArrayBuffer | undefined> {
   }
 }
 
+const MAX_OG_IMAGE_BYTES = 1_500_000 // 1.5 MB
+const OG_IMAGE_TIMEOUT_MS = 15_000
+
 export async function loadOgImage(url: string): Promise<string | null> {
   try {
-    const res = await fetch(url, { next: { revalidate: false } })
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), OG_IMAGE_TIMEOUT_MS)
+    const res = await fetch(url, { next: { revalidate: false }, signal: controller.signal })
+    clearTimeout(timeout)
     if (!res.ok) return null
-    const contentType = res.headers.get('content-type') || 'image/png'
+    const contentLength = Number(res.headers.get('content-length') || '0')
+    if (contentLength > MAX_OG_IMAGE_BYTES) return null
     const buffer = await res.arrayBuffer()
+    if (buffer.byteLength > MAX_OG_IMAGE_BYTES) return null
+    const contentType = res.headers.get('content-type') || 'image/png'
     const base64 = Buffer.from(buffer).toString('base64')
     return `data:${contentType};base64,${base64}`
   } catch {
@@ -92,13 +101,13 @@ export function OgAvatar({
         src={faviconData}
         alt="Raka"
         style={{ 
-          width: '100%', 
-          height: '100%', 
+          width: '80%', 
+          height: '80%', 
           objectFit: 'cover', 
           position: 'absolute',
-          // inset: 0,
-          left: '-2px',
-          bottom: '-2px',
+          inset: 0,
+          left: '5px',
+          bottom: '7px',
           placeSelf: 'center',
         }}
       />

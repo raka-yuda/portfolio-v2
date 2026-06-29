@@ -256,10 +256,16 @@ button {
 .back-btn:hover svg { transform: translateX(-2px); }
 
 @keyframes pgIn {
+  from { transform: translateY(10px); }
+  to   { transform: none; }
+}
+.page-in { animation: pgIn 0.28s cubic-bezier(0.4,0,0.2,1) backwards; }
+
+@keyframes pgInFade {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: none; }
 }
-.page-in { animation: pgIn 0.28s cubic-bezier(0.4,0,0.2,1) backwards; }
+.page-in-fade { animation: pgInFade 0.28s cubic-bezier(0.4,0,0.2,1) backwards; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
@@ -287,6 +293,7 @@ button {
 @media (max-width: 640px) {
   .layout-container.links-page { padding-bottom: 40px; }
 }
+
 
 .grid-2 {
   display: grid;

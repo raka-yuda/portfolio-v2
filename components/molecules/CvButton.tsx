@@ -1,7 +1,4 @@
-"use client";
-
-import { track } from "@/lib/analytics";
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 export function CvButton({
 	href,
@@ -21,7 +18,7 @@ export function CvButton({
 			rel="noopener noreferrer"
 			className={className}
 			style={style}
-			onClick={() => track("cv_click", { url: href })}
+			data-track="cv_click" data-track-url={href}
 		>
 			{children}
 		</a>

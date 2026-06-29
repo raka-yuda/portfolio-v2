@@ -72,14 +72,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <PageLayout>
+    <PageLayout fade>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Link href="/project" className="back-btn"><IcoBack /> Projects</Link>
       <h1 className="responsive-h1" style={{ fontWeight: 600, fontSize: 34, lineHeight: '100%', marginBottom: 28, letterSpacing: '-0.01em' }}>
         {project.title} {project.emoji}
       </h1>
       <Divider />
-      <ImgPh h={200} label="project screenshot" src={project.image} alt={project.title} emoji={project.emoji} blurhash={project.blurhash}/>
+      <ImgPh h={200} label="project screenshot" src={project.image} alt={project.title} emoji={project.emoji} blurhash={project.blurhash} sizes="(max-width: 680px) 100vw, 680px"/>
 
       <div style={{ marginTop: 40, marginBottom: 40 }}>
         <div style={{ fontWeight: 500, fontSize: 17, marginBottom: 14 }}>Description</div>

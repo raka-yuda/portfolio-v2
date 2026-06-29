@@ -12,7 +12,7 @@ interface HomeAvatarProps {
 
 export function HomeAvatar({
   size = 68,
-  src = '/favicon.png',
+  src = '/favicon-96x96.png',
   interactive = true,
   className = 'neu-avatar home-avatar',
   alt = 'Raka',

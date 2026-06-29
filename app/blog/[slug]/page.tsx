@@ -71,14 +71,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <PageLayout>
+    <PageLayout fade>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <Link href="/blog" className="back-btn"><IcoBack /> Blogs</Link>
       <h1 className="responsive-h1" style={{ fontWeight: 600, fontSize: 30, lineHeight: '136%', marginBottom: 0, letterSpacing: '-0.01em' }}>
         {post.title}
       </h1>
       <AuthorRow date={formatDate(post.publishedAt)} readTime={post.readingTime} />
-      <ImgPh h={200} label="article image" src={post.image} blurhash={post.blurhash} />
+      <ImgPh h={200} label="article image" src={post.image} blurhash={post.blurhash} sizes="(max-width: 680px) 100vw, 680px" />
 
       <div style={{ position: 'relative', marginTop: 40 }}>
         <TableOfContents items={toc} />

@@ -1,8 +1,5 @@
-'use client'
-
-import { useState } from 'react'
 import Image from 'next/image'
-import { Blurhash } from 'react-blurhash'
+import { LazyBlurhash } from './LazyBlurhash'
 
 interface ImgPhProps {
   h?: number
@@ -11,11 +8,20 @@ interface ImgPhProps {
   emoji?: string
   label?: string
   blurhash?: string
+  priority?: boolean
+  sizes?: string
 }
 
-export function ImgPh({ h = 139, src, alt = '', emoji, label, blurhash }: ImgPhProps) {
-  const [loaded, setLoaded] = useState(false)
-
+export function ImgPh({
+  h = 139,
+  src,
+  alt = '',
+  emoji,
+  label,
+  blurhash,
+  priority,
+  sizes = '100vw',
+}: ImgPhProps) {
   return (
     <div
       aria-label={alt}
@@ -36,32 +42,38 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label, blurhash }: ImgPhP
       }}
     >
       {/* Blurhash placeholder */}
-      {src && blurhash && !loaded && (
-        <div style={{ position: 'absolute', inset: 0, zIndex: -2 }}>
-          <Blurhash
-            hash={blurhash}
-            width={32}
-            height={32}
-            resolutionX={32}
-            resolutionY={32}
-            punch={1}
-            style={{ width: '100%', height: '100%' }}
-          />
+      {src && blurhash && (
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <LazyBlurhash hash={blurhash} />
         </div>
       )}
 
       {/* Real image */}
       {src && (
-        <div style={{ position: 'absolute', inset: 0, padding: 16, zIndex: -1, opacity: loaded ? 1 : 0, transition: 'opacity 0.4s ease' }}>
+        <div style={{ position: 'absolute', inset: 0, padding: 16, zIndex: 1 }}>
           <Image
             src={src}
             alt={alt}
             fill
+            sizes={sizes}
             style={{ objectFit: 'cover' }}
-            loading="eager"
-            onLoad={() => setLoaded(true)}
+            loading={priority ? 'eager' : 'lazy'}
+            priority={priority}
           />
         </div>
+      )}
+
+      {/* Gradient wash — restores the tinted/vintage look over the image */}
+      {src && (
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute', inset: 0,
+            background: 'linear-gradient(135deg, var(--placeholder-grad-2) 0%, transparent 60%)',
+            pointerEvents: 'none',
+            zIndex: 2,
+          }}
+        />
       )}
 
       {/* Dot grain */}
@@ -73,7 +85,7 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label, blurhash }: ImgPhP
           backgroundSize: '14px 14px',
           opacity: src ? 0.25 : 0.5,
           pointerEvents: 'none',
-          zIndex: 1,
+          zIndex: 3,
         }}
       />
 
@@ -84,9 +96,9 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label, blurhash }: ImgPhP
           position: 'absolute',
           top: '-30%', right: '-20%',
           width: '60%', height: '120%',
-          background: 'radial-gradient(circle at center, color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 70%)',
+          background: 'radial-gradient(circle at center, color-mix(in srgb, var(--accent) 16%, transparent) 0%, transparent 50%)',
           pointerEvents: 'none',
-          zIndex: 3,
+          zIndex: 4,
         }}
       />
 
@@ -94,7 +106,7 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label, blurhash }: ImgPhP
       {emoji && (
         <span
           style={{
-            position: 'relative', zIndex: 2,
+            position: 'relative', zIndex: 5,
             fontSize: Math.round(h * 0.32),
             lineHeight: 1,
             filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.08))',
@@ -106,7 +118,7 @@ export function ImgPh({ h = 139, src, alt = '', emoji, label, blurhash }: ImgPhP
       {!src && !emoji && label && (
         <span
           style={{
-            position: 'relative', zIndex: 2,
+            position: 'relative', zIndex: 5,
             fontFamily: 'var(--font-caveat)',
             fontSize: Math.round(h * 0.28),
             color: 'color-mix(in srgb, var(--accent) 55%, transparent)',
